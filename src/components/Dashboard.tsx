@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import RevenueChart from './charts/RevenueChart';
 import CampaignPerformanceChart from './charts/CampaignPerformanceChart';
 import InfluencerComparisonChart from './charts/InfluencerComparisonChart';
 import RevenueSources from './charts/RevenueSources';
@@ -47,11 +46,7 @@ const Dashboard: React.FC = () => {
       
       {activeTab === 'influencer' && (
         <div className="chart-container">
-          <div className="chart-card">
-            <h2>Revenue Over Time</h2>
-            <p className="subtitle">Showing data for: {dateRange}</p>
-            <RevenueChart dateRange={dateRange} />
-          </div>
+       
           
           <div className="chart-card">
             <h2>Revenue Sources</h2>

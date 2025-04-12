@@ -346,21 +346,22 @@ interface RevenueData {
   revenue: number[];
 }
 
-interface CampaignData {
-  campaigns: string[];
-  engagement: number[];
-  conversion: number[];
-}
+// Remove unused interfaces
+// interface CampaignData {
+//   campaigns: string[];
+//   engagement: number[];
+//   conversion: number[];
+// }
 
-interface InfluencerData {
-  influencers: string[];
-  followers: number[];
-  engagement: number[];
-  revenue: number[];
-}
+// interface InfluencerData {
+//   influencers: string[];
+//   followers: number[];
+//   engagement: number[];
+//   revenue: number[];
+// }
 
 // Original mock data functions
-export const fetchInfluencerRevenue = async (_influencerId?: string, _timeRange?: string): Promise<RevenueData> => {
+export const fetchInfluencerRevenue = async (): Promise<RevenueData> => {
   try {
     // In a real app, this would be a real API call
     // const response = await axios.get(`${BASE_URL}/influencers/${influencerId}/revenue?timeRange=${timeRange}`);
@@ -382,5 +383,3 @@ export const fetchInfluencerRevenue = async (_influencerId?: string, _timeRange?
     throw error;
   }
 };
-
-// Rest of your dataService code...

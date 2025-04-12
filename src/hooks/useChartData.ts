@@ -1,90 +1,56 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
-interface ChartDataState<T> {
-  data: T | null;
-  loading: boolean;
-  error: string | null;
-}
-
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.example.com';
-
-export function useChartData<T>(endpoint: string, defaultData: T | null = null): ChartDataState<T> {
-  const [state, setState] = useState<ChartDataState<T>>({
-    data: defaultData,
-    loading: true,
-    error: null
-  });
+// Generic type parameter T for the data structure
+export function useChartData<T>(endpoint: string) {
+  const [data, setData] = useState<T | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const loadData = async () => {
       try {
-        setState(prev => ({ ...prev, loading: true }));
+        setLoading(true);
         
-        // For development, use mock data if no API is available
-        if (process.env.NODE_ENV === 'development' && !process.env.NEXT_PUBLIC_API_URL) {
-          // Simulate API delay
-          await new Promise(resolve => setTimeout(resolve, 800));
-          
-          // Return mock data based on endpoint
-          let mockData: any = null;
-          
-          if (endpoint === '/revenue') {
-            mockData = {
-              months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-              revenue: [12000, 19000, 15000, 22000, 24000, 30000, 28000, 32000, 34000, 36000, 40000, 45000],
-              projectedRevenue: [11000, 18000, 16000, 21000, 25000, 29000, 30000, 33000, 36000, 38000, 42000, 48000]
-            };
-          } else if (endpoint === '/campaigns') {
-            mockData = {
-              campaigns: ['Instagram Story', 'YouTube Video', 'TikTok Challenge', 'Instagram Post', 'YouTube Short'],
-              engagement: [85, 63, 92, 78, 56],
-              conversion: [23, 42, 35, 27, 15]
-            };
-          } else if (endpoint === '/influencers') {
-            mockData = {
-              influencers: ['@fashionista', '@techguru', '@foodlover', '@travelbug', '@fitnessguru'],
-              followers: [1200000, 850000, 920000, 1500000, 750000],
-              engagement: [3.2, 4.5, 5.1, 2.8, 6.7],
-              revenue: [45000, 38000, 42000, 55000, 36000]
-            };
-          } else if (endpoint === '/revenue-sources') {
-            mockData = [
-              { value: 40, name: 'Sponsored Posts' },
-              { value: 25, name: 'Affiliate Marketing' },
-              { value: 15, name: 'Product Sales' },
-              { value: 12, name: 'Brand Partnerships' },
-              { value: 8, name: 'Paid Subscriptions' }
-            ];
-          }
-          
-          setState({
-            data: mockData as T,
-            loading: false,
-            error: null
-          });
+        // Simulate API call delay
+        await new Promise(resolve => setTimeout(resolve, 500));
+        
+        // Mock data based on endpoint
+        let mockData: any;
+        
+        if (endpoint === '/revenue') {
+          mockData = {
+            dates: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            revenue: [12000, 19000, 15000, 22000, 24000, 28000]
+          };
+        } else if (endpoint === '/influencers') {
+          mockData = {
+            influencers: ['@user1', '@user2', '@user3', '@user4', '@user5'],
+            followers: [100000, 250000, 180000, 320000, 150000],
+            engagement: [3.2, 4.5, 2.8, 3.9, 5.1],
+            revenue: [5000, 12000, 7500, 15000, 8200]
+          };
+        } else if (endpoint === '/revenue-sources') {
+          mockData = {
+            sources: ['Sponsored Posts', 'Affiliate Links', 'Product Sales', 'Subscriptions'],
+            values: [45000, 32000, 28000, 15000]
+          };
         } else {
-          // Real API call
-          const response = await axios.get<T>(`${API_BASE_URL}${endpoint}`);
-          setState({
-            data: response.data,
-            loading: false,
-            error: null
-          });
+          mockData = {};
         }
+        
+        setData(mockData as T);
+        setError(null);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : 'An error occurred while fetching data';
-        setState({
-          data: null,
-          loading: false,
-          error: errorMessage
-        });
-        console.error('Error fetching chart data:', err);
+        // Convert error to string
+        setError(err instanceof Error ? err.message : String(err));
+        setData(null);
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData();
+    loadData();
   }, [endpoint]);
 
-  return state;
+  return { data, loading, error };
 }

@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { getCostoPromedio } from '../../services/dataService';
+import { EChartsOption } from 'echarts';
 
 const CostoPromedioChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   const [loading, setLoading] = useState<boolean>(true);
   
   useEffect(() => {
@@ -26,7 +29,11 @@ const CostoPromedioChart: React.FC = () => {
           {
             name: 'Costo Promedio',
             type: 'gauge',
-            data: [{ value: validCosto.toFixed(2), name: 'Costo' }],
+            data: [{ 
+              // Convert to number instead of string
+              value: Number(validCosto.toFixed(2)), 
+              name: 'Costo' 
+            }],
             min: 0,
             max: 100,
             axisLine: {

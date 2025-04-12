@@ -1,65 +1,57 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
+import { useChartData } from '../../hooks/useChartData';
+import { EChartsOption } from 'echarts';
 
-interface RevenueSource {
-  value: number;
-  name: string;
+interface RevenueSourcesData {
+  sources: string[];
+  values: number[];
 }
 
 const RevenueSources: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
+  const { data, loading, error } = useChartData<RevenueSourcesData>('/revenue-sources');
   
   useEffect(() => {
-    // Mock data for revenue sources
-    const mockData: RevenueSource[] = [
-      { value: 40, name: 'Sponsored Posts' },
-      { value: 25, name: 'Affiliate Marketing' },
-      { value: 15, name: 'Product Sales' },
-      { value: 12, name: 'Brand Partnerships' },
-      { value: 8, name: 'Paid Subscriptions' }
-    ];
-    
-    setOptions({
-      tooltip: {
-        trigger: 'item',
-        formatter: '{a} <br/>{b}: {c} ({d}%)'
-      },
-      legend: {
-        orient: 'vertical',
-        right: 10,
-        top: 'center',
-        data: mockData.map(item => item.name)
-      },
-      series: [
-        {
-          name: 'Revenue Sources',
-          type: 'pie',
-          radius: ['50%', '70%'],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 10,
-            borderColor: '#fff',
-            borderWidth: 2
-          },
-          label: {
-            show: false,
-            position: 'center'
-          },
-          emphasis: {
-            label: {
-              show: true,
-              fontSize: '18',
-              fontWeight: 'bold'
+    if (data) {
+      setOptions({
+        tooltip: {
+          trigger: 'item',
+          formatter: '{b}: ${c} ({d}%)'
+        },
+        legend: {
+          orient: 'vertical',
+          right: 10,
+          top: 'center'
+        },
+        series: [
+          {
+            name: 'Revenue Sources',
+            type: 'pie',
+            radius: '55%',
+            center: ['40%', '50%'],
+            data: data.sources.map((source, index) => ({
+              name: source,
+              value: data.values[index]
+            })),
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+              }
             }
-          },
-          labelLine: {
-            show: false
-          },
-          data: mockData
-        }
-      ]
-    });
-  }, []);
+          }
+        ]
+      });
+    }
+  }, [data]);
+
+  if (loading) return <div>Loading revenue sources data...</div>;
+  if (error) return <div>Error loading revenue sources data: {error}</div>;
+  if (!data) return <div>No revenue sources data available</div>;
 
   return <ReactECharts option={options} style={{ height: '300px' }} />;
 };

@@ -1,9 +1,13 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { getImporteByMonth } from '../../services/dataService';
+import { EChartsOption } from 'echarts';
+import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
 const ImporteByMonthChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   
   useEffect(() => {
     const importeByMonth = getImporteByMonth();
@@ -28,8 +32,15 @@ const ImporteByMonthChart: React.FC = () => {
       },
       tooltip: {
         trigger: 'axis',
-        formatter: function(params: any) {
-          return `${params[0].name}: $${params[0].value.toLocaleString()}`;
+        formatter: function(params: CallbackDataParams | CallbackDataParams[]) {
+          if (Array.isArray(params) && params.length > 0 && params[0]) {
+            const value = params[0].value;
+            if (typeof value === 'number') {
+              return `${params[0].name}: $${value.toLocaleString()}`;
+            }
+            return `${params[0].name}: ${value}`;
+          }
+          return '';
         }
       },
       xAxis: {

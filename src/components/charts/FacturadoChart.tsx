@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { getFacturadoVsNoFacturado } from '../../services/dataService';
+import { EChartsOption } from 'echarts';
 
 const FacturadoChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   
   useEffect(() => {
     const { facturado, noFacturado } = getFacturadoVsNoFacturado();
@@ -28,8 +31,8 @@ const FacturadoChart: React.FC = () => {
           type: 'pie',
           radius: '50%',
           data: [
-            { value: facturado, name: 'Facturado', itemStyle: { color: '#91cc75' } },
-            { value: noFacturado, name: 'No Facturado', itemStyle: { color: '#ee6666' } }
+            { value: facturado, name: 'Facturado', itemStyle: { color: '#5470c6' } },
+            { value: noFacturado, name: 'No Facturado', itemStyle: { color: '#91cc75' } }
           ],
           emphasis: {
             itemStyle: {

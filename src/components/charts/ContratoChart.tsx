@@ -1,9 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { getContratoVsNoContrato } from '../../services/dataService';
+import { EChartsOption } from 'echarts';
 
 const ContratoChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   
   useEffect(() => {
     const { conContrato, sinContrato } = getContratoVsNoContrato();

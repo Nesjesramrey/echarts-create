@@ -12,6 +12,29 @@
   font-size: 2rem;
 }
 
+.statsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.statCard {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  min-width: 200px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #5470c6;
+  margin-top: 0.5rem;
+}
+
 .chartGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
@@ -38,5 +61,10 @@
 
   .container {
     padding: 1rem;
+  }
+
+  .statsContainer {
+    flex-direction: column;
+    align-items: center;
   }
 }

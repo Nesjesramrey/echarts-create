@@ -1,6 +1,9 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useChartData } from '../../hooks/useChartData';
+import { EChartsOption } from 'echarts';
 
 interface CampaignData {
   campaigns: string[];
@@ -9,7 +12,7 @@ interface CampaignData {
 }
 
 const CampaignPerformanceChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   const { data, loading, error } = useChartData<CampaignData>('/campaigns');
   
   useEffect(() => {

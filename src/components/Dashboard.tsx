@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import RevenueChart from './charts/RevenueChart';
 import CampaignPerformanceChart from './charts/CampaignPerformanceChart';

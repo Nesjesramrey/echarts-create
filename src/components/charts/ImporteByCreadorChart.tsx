@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { getImporteByCreador } from '../../services/dataService';
+import { EChartsOption } from 'echarts';
 
 const ImporteByCreadorChart: React.FC = () => {
-  const [options, setOptions] = useState<any>({});
+  const [options, setOptions] = useState<EChartsOption>({});
   
   useEffect(() => {
     const importeByCreador = getImporteByCreador();
@@ -22,7 +23,10 @@ const ImporteByCreadorChart: React.FC = () => {
       tooltip: {
         trigger: 'axis',
         formatter: function(params: any) {
-          return `${params[0].name}: $${params[0].value.toLocaleString()}`;
+          if (Array.isArray(params) && params.length > 0) {
+            return `${params[0].name}: $${params[0].value.toLocaleString()}`;
+          }
+          return '';
         }
       },
       xAxis: {

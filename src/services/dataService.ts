@@ -335,3 +335,52 @@ export const getAccionesTikTok = () => {
     deal["No de acciones"] === "TikTok"
   ).length;
 };
+
+// Remove unused imports and variables
+// import axios from "axios";
+// const BASE_URL = "https://api.example.com";
+
+// Define types for the mock data
+interface RevenueData {
+  months: string[];
+  revenue: number[];
+}
+
+interface CampaignData {
+  campaigns: string[];
+  engagement: number[];
+  conversion: number[];
+}
+
+interface InfluencerData {
+  influencers: string[];
+  followers: number[];
+  engagement: number[];
+  revenue: number[];
+}
+
+// Original mock data functions
+export const fetchInfluencerRevenue = async (_influencerId?: string, _timeRange?: string): Promise<RevenueData> => {
+  try {
+    // In a real app, this would be a real API call
+    // const response = await axios.get(`${BASE_URL}/influencers/${influencerId}/revenue?timeRange=${timeRange}`);
+    // return response.data;
+
+    // For now, return mock data
+    return {
+      months: [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+      ],
+      revenue: [
+        12000, 19000, 15000, 22000, 24000, 30000, 
+        28000, 32000, 34000, 36000, 40000, 45000,
+      ],
+    };
+  } catch (error) {
+    console.error("Error fetching revenue data:", error);
+    throw error;
+  }
+};
+
+// Rest of your dataService code...

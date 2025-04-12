@@ -286,6 +286,11 @@ export const getImporteByMonth = () => {
   return result;
 };
 
+// Add the missing function
+export const getTotalImporte = () => {
+  return dealsData.reduce((total, deal) => total + deal.Importe, 0);
+};
+
 export const getCostoPromedio = () => {
   let totalCosto = 0;
   let count = 0;
@@ -327,6 +332,7 @@ export const getContratoVsNoContrato = () => {
     }
   });
   
+  // Return object with both values
   return { conContrato, sinContrato };
 };
 

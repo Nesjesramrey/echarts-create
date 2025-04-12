@@ -23,6 +23,7 @@ const Dashboard: React.FC = () => {
     setDateRange(newRange);
     // In a real app, you would fetch new data based on the date range
     console.log(`Date range changed to: ${newRange}`);
+    console.log(dateRange)
   };
   
   return (

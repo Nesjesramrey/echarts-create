@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import ReactECharts from 'echarts-for-react';
 import { useChartData } from '../../hooks/useChartData';
 import { EChartsOption } from 'echarts';
-import type { CallbackDataParams } from 'echarts/types/dist/shared';
 
 const InfluencerComparisonChart: React.FC = () => {
   const [options, setOptions] = useState<EChartsOption>({});

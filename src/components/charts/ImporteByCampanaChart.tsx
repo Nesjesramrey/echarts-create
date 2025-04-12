@@ -15,7 +15,8 @@ const ImporteByCampanaChart: React.FC = () => {
     
     const campanas = sortedData.map(item => item[0]);
     const importes = sortedData.map(item => item[1]);
-    
+    console.log(campanas);
+    console.log(importes);
     setOptions({
       title: {
         text: 'Distribución de Importe por Campaña',

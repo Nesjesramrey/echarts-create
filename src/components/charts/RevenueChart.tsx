@@ -18,6 +18,7 @@ interface RevenueChartProps {
 const RevenueChart: React.FC<RevenueChartProps> = ({ dateRange }) => {
   const [options, setOptions] = useState<EChartsOption>({});
   const { data, loading, error } = useChartData<RevenueData>(`/revenue?range=${dateRange}`);
+  console.log(loading, error)
   
   useEffect(() => {
     if (data) {

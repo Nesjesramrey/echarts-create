@@ -15,7 +15,7 @@ export function useChartData<T>(endpoint: string) {
         await new Promise(resolve => setTimeout(resolve, 500));
         
         // Mock data based on endpoint
-        let mockData: any;
+        let mockData: { [key: string]: any};
         
         if (endpoint === '/revenue') {
           mockData = {

@@ -8,6 +8,7 @@
 // Update the function signature to remove unused parameters
 export const fetchData = async (endpoint) => {
   // Simulate API call delay
+  console, log("fetching data", endpoint);
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   // Rest of your function implementation

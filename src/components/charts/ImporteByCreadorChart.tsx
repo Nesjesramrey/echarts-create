@@ -5,7 +5,7 @@ import ReactECharts from 'echarts-for-react';
 import { getImporteByCreador } from '../../services/dataService';
 import { EChartsOption } from 'echarts';
 import type { CallbackDataParams } from 'echarts/types/dist/shared';
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 
 interface CreadorOption {
   value: string;
@@ -103,10 +103,47 @@ const ImporteByCreadorChart: React.FC = () => {
     setSelectedCreadores([...selected]);
   };
 
+  // Custom styles for the Select component
+  const selectStyles: StylesConfig<CreadorOption, true> = {
+    control: (base) => ({
+      ...base,
+      fontFamily: '"Segoe UI", Arial, sans-serif',
+      fontSize: '14px',
+      color: 'red',
+    }),
+    option: (base) => ({
+      ...base,
+      fontFamily: '"Segoe UI", Arial, sans-serif',
+      fontSize: '14px',
+      color: 'blue',
+
+    }),
+    placeholder: (base) => ({
+      ...base,
+      fontFamily: '"Segoe UI", Arial, sans-serif',
+      fontSize: '14px',
+    }),
+    singleValue: (base) => ({
+      ...base,
+      fontFamily: '"Segoe UI", Arial, sans-serif',
+      fontSize: '14px',
+      color: 'red',
+    }),
+    multiValue: (base) => ({
+      ...base,
+      fontFamily: '"Segoe UI", Arial, sans-serif',
+      color: 'red',
+    }),
+    multiValueLabel: (base) => ({
+      ...base,
+      fontSize: '14px',
+    }),
+  };
+
   return (
     <div>
       <div style={{ marginBottom: '20px' }}>
-        <label style={{ display: 'block', marginBottom: '5px' }}>
+        <label style={{ display: 'block', marginBottom: '5px', fontFamily: '"Segoe UI", Arial, sans-serif' }}>
           Seleccionar Creadores:
         </label>
         <Select
@@ -117,6 +154,7 @@ const ImporteByCreadorChart: React.FC = () => {
           placeholder="Seleccionar creadores..."
           className="basic-multi-select"
           classNamePrefix="select"
+          styles={selectStyles}
         />
       </div>
       <ReactECharts option={options} style={{ height: '400px' }} />

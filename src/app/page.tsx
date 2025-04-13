@@ -1,5 +1,5 @@
 import React from 'react';
-import Dashboard from '../components/Dashboard';
+import Dashboard from '@/components/Dashboard';
 import styles from './page.module.css';
 
 export default function Home() {

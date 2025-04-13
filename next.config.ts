@@ -6,6 +6,8 @@ const nextConfig: NextConfig = {
    eslint: {
     ignoreDuringBuilds: true,
   },
+  // Explicitly enable App Router
+ 
 };
 
 export default nextConfig;

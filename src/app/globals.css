@@ -25,9 +25,10 @@ body {
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 a {
@@ -40,3 +41,5 @@ a {
     color-scheme: dark;
   }
 }
+
+/* If you need the .App class styles, you can add them here or create a specific component style */

@@ -73,8 +73,8 @@ const Dashboard: React.FC = () => {
       {activeTab === 'campaign' && (
         <div className="chart-container">
           <div className="chart-card">
-            <h2>Top Creadores por Importe</h2>
-            <p className="subtitle">Mostrando los 10 creadores con mayor importe</p>
+            <h2>Creadores por Importe</h2>
+            <p className="subtitle">Mostrando creadores por importe</p>
             <ImporteByCreadorChart />
           </div>
 

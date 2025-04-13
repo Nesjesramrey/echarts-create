@@ -8,15 +8,15 @@ import { EChartsOption } from 'echarts';
 const CostoPromedioChart: React.FC = () => {
   const [options, setOptions] = useState<EChartsOption>({});
   const [loading, setLoading] = useState<boolean>(true);
-  
+
   useEffect(() => {
     try {
       const costoPromedio = getCostoPromedio();
       // Ensure the value is valid and within reasonable range
-      const validCosto = isNaN(costoPromedio) ? 0 : 
-                         costoPromedio > 100 ? 100 : 
-                         costoPromedio < 0 ? 0 : costoPromedio;
-      
+      const validCosto = isNaN(costoPromedio) ? 0 :
+        costoPromedio > 100 ? 100 :
+          costoPromedio < 0 ? 0 : costoPromedio;
+
       setOptions({
         title: {
           text: 'Porcentaje de Costo Promedio',
@@ -29,10 +29,10 @@ const CostoPromedioChart: React.FC = () => {
           {
             name: 'Costo Promedio',
             type: 'gauge',
-            data: [{ 
+            data: [{
               // Convert to number instead of string
-              value: Number(validCosto.toFixed(2)), 
-              name: 'Costo' 
+              value: Number(validCosto.toFixed(2)),
+              name: 'Costo'
             }],
             min: 0,
             max: 100,
@@ -48,7 +48,7 @@ const CostoPromedioChart: React.FC = () => {
             },
             pointer: {
               itemStyle: {
-                color: 'auto'
+                color: 'inherit'
               }
             },
             axisTick: {

@@ -20,7 +20,6 @@ const ImporteByCreadorChart: React.FC = () => {
 
   useEffect(() => {
     const importeByCreador = getImporteByCreador();
-    console.log(importeByCreador);
     const sortedData = Object.entries(importeByCreador)
       .sort((a, b) => b[1] - a[1]);
     

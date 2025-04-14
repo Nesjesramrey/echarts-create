@@ -11,7 +11,6 @@ const ImporteByMonthChart: React.FC = () => {
   
   useEffect(() => {
     const importeByMonth = getImporteByMonth();
-    console.log("Original data:", importeByMonth);
     
     // Remove the undefined key if it exists
     if ('undefined' in importeByMonth) {
@@ -43,7 +42,6 @@ const ImporteByMonthChart: React.FC = () => {
         return numMonthA - numMonthB;
       });
     
-    console.log("Filtered and sorted data:", sortedData);
     
     // Format month labels to be more readable
     const months = sortedData.map(item => {

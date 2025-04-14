@@ -4,9 +4,10 @@ import './Header.css';
 
 interface HeaderProps {
   onDateRangeChange: (range: string) => void;
+  onLogout: () => void; // Add this line to include the onLogout prop
 }
 
-const Header: React.FC<HeaderProps> = ({ onDateRangeChange }) => {
+const Header: React.FC<HeaderProps> = ({ onDateRangeChange, onLogout }) => {
   const { darkMode, setDarkMode } = useTheme();
   const [dateRange, setDateRange] = useState<string>('last30days');
   
@@ -48,6 +49,13 @@ const Header: React.FC<HeaderProps> = ({ onDateRangeChange }) => {
           aria-label="Toggle dark mode"
         >
           {darkMode ? '☀️' : '🌙'}
+        </button>
+        <button 
+          className="logout-button" 
+          onClick={onLogout}
+          aria-label="Logout"
+        >
+          Logout
         </button>
       </div>
     </header>

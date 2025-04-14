@@ -26,9 +26,15 @@ const Dashboard: React.FC = () => {
     console.log(dateRange)
   };
 
+  // Añade esta función al componente Dashboard
+  const handleLogout = () => {
+      localStorage.removeItem('isAuthenticated');
+      window.location.href = '/login';
+  };
+
   return (
     <div className={`dashboard ${darkMode ? 'dark-theme' : ''}`}>
-      <Header onDateRangeChange={handleDateRangeChange} />
+      <Header onDateRangeChange={handleDateRangeChange} onLogout={handleLogout}/>
 
       <div className="tabs-container">
         <button

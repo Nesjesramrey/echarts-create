@@ -68,14 +68,14 @@ const CostoPromedioChart: React.FC = () => {
               }
             },
             axisLabel: {
-              color: 'auto',
+              color: 'inherit',
               distance: 40,
               fontSize: 16
             },
             detail: {
               valueAnimation: true,
               formatter: '{value}%',
-              color: 'auto',
+              color: 'inherit',
               fontSize: 30
             }
           }

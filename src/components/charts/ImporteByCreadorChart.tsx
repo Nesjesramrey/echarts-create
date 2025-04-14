@@ -147,6 +147,8 @@ const ImporteByCreadorChart: React.FC = () => {
           Seleccionar Creadores:
         </label>
         <Select
+          instanceId="creadores-select" // Añade esta línea
+          inputId="creadores-select-input" // Añade esta línea
           isMulti
           options={allCreadores}
           value={selectedCreadores}

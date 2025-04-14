@@ -21,6 +21,9 @@
 .wide-card {
   grid-column: 1 / -1;
 }
+label {
+  color: green;
+}
 
 h1 {
   color: #333;

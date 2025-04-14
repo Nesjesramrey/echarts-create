@@ -23,6 +23,11 @@ const ImporteByCampanaChart: React.FC = () => {
       ...base,
       fontFamily: '"Segoe UI", Arial, sans-serif',
       fontSize: '14px',
+      color: 'red', // Cambia el color del texto
+    }),
+    menuList: (base) => ({
+      ...base,
+      color: 'yellow', // Cambia el color del texto 
     }),
     option: (base) => ({
       ...base,
@@ -34,6 +39,7 @@ const ImporteByCampanaChart: React.FC = () => {
       ...base,
       fontFamily: '"Segoe UI", Arial, sans-serif',
       fontSize: '14px',
+      
     }),
     multiValue: (base) => ({
       ...base,
@@ -71,10 +77,6 @@ const ImporteByCampanaChart: React.FC = () => {
       selectedCampanas.some(selected => selected.value === campana)
     );
     
-    const campanas = filteredData.map(item => item[0]);
-    const importes = filteredData.map(item => item[1]);
-    console.log(campanas);
-    console.log(importes);
     
     setOptions({
       title: {
@@ -117,6 +119,8 @@ const ImporteByCampanaChart: React.FC = () => {
           Seleccionar Campañas:
         </label>
         <Select
+          instanceId="campanas-select"  // ID único para este Select
+          inputId="campanas-select-input"  // ID único para el input
           isMulti
           options={allCampanas}
           value={selectedCampanas}

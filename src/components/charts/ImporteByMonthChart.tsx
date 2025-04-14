@@ -11,18 +11,51 @@ const ImporteByMonthChart: React.FC = () => {
   
   useEffect(() => {
     const importeByMonth = getImporteByMonth();
+    console.log("Original data:", importeByMonth);
     
-    // Sort by date
+    // Remove the undefined key if it exists
+    if ('undefined' in importeByMonth) {
+      delete importeByMonth['undefined'];
+    }
+    
+    // Filter out any problematic keys and sort by date
     const sortedData = Object.entries(importeByMonth)
+      .filter(([key]) => {
+        // Ensure key is valid and has the expected format
+        if (!key || key === 'undefined') return false;
+        
+        const parts = key.split('/');
+        if (parts.length !== 2) return false;
+        
+        const [month, year] = parts;
+        return !isNaN(parseInt(month)) && !isNaN(parseInt(year));
+      })
       .sort((a, b) => {
         const [monthA, yearA] = a[0].split('/');
         const [monthB, yearB] = b[0].split('/');
         
-        if (yearA !== yearB) return parseInt(yearA) - parseInt(yearB);
-        return parseInt(monthA) - parseInt(monthB);
+        const numYearA = parseInt(yearA);
+        const numYearB = parseInt(yearB);
+        const numMonthA = parseInt(monthA);
+        const numMonthB = parseInt(monthB);
+        
+        if (numYearA !== numYearB) return numYearA - numYearB;
+        return numMonthA - numMonthB;
       });
     
-    const months = sortedData.map(item => item[0]);
+    console.log("Filtered and sorted data:", sortedData);
+    
+    // Format month labels to be more readable
+    const months = sortedData.map(item => {
+      const [month, year] = item[0].split('/');
+      const monthNames = [
+        'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
+      ];
+      const monthIndex = parseInt(month) - 1;
+      return `${monthNames[monthIndex]} ${year}`;
+    });
+    
     const importes = sortedData.map(item => item[1]);
     
     setOptions({

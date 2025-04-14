@@ -102,11 +102,7 @@ const Dashboard: React.FC = () => {
             <FacturadoChart />
           </div>
 
-          <div className="chart-card">
-            <h2>Estado de Contratos</h2>
-            <p className="subtitle">Importes con contrato vs sin contrato</p>
-            <ContratoChart />
-          </div>
+
         </div>
       )}
     </div>

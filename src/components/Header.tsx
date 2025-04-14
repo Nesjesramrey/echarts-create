@@ -30,7 +30,7 @@ const Header: React.FC<HeaderProps> = ({ onDateRangeChange }) => {
       </div>
       <div className="header-right">
         <div className="date-range-selector">
-          <label htmlFor="dateRange">Date Range:</label>
+          {/* <label htmlFor="dateRange">Date Range:</label>
           <select 
             id="dateRange" 
             value={dateRange} 
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ onDateRangeChange }) => {
             <option value="last30days">Last 30 Days</option>
             <option value="last90days">Last 90 Days</option>
             <option value="lastYear">Last Year</option>
-          </select>
+          </select> */}
         </div>
         <button 
           className="theme-toggle" 
